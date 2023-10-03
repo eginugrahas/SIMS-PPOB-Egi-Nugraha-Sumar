@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Input(props) {
-  const { type, name, placeholder, cn, icon, visibility } = props;
+  const { type, name, placeholder, cn, icon, visibility, value, onChange } = props;
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -17,7 +17,7 @@ function Input(props) {
   return (
     <div
       className={`border rounded ${
-        isFocused ? "border-red" : "border-gray"
+        isFocused ? "border-red" : "border-dark-gray"
       } p-2 flex items-center h-[48px]`}
     >
       <i className={`${icon} ${isFocused ? "text-red" : "text-gray"} mr-2`}></i>
@@ -27,6 +27,8 @@ function Input(props) {
         type={isPasswordVisible ? "text" : type}
         name={name}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         className={`${cn} outline-none placeholder:text-xs placeholder:text-gray text-sm font-medium`}
       />
       {visibility && (
