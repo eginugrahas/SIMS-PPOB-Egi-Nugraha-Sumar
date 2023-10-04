@@ -2,8 +2,10 @@ import React from "react";
 import Header from "../components/Elements/Header";
 import ProfileHero from "../components/Elements/ProfileHero";
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
-function MainLayout({ children }) {
+
+function MainLayout() {
   const user = useSelector((state) => state.user);
   const balance = useSelector((state) => state.transaction.balance);
   console.log(balance)
@@ -13,7 +15,7 @@ function MainLayout({ children }) {
       <div className="border-b border-gray"></div>
       <div className="py-5 px-[10%]">
         <ProfileHero user={user.user} balance={balance.balance} />
-        {children}
+        <Outlet />
       </div>
     </div>
   );
