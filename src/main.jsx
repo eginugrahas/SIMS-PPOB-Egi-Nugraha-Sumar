@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/Login.jsx";
-import RegisterPage from "./pages/register.jsx";
+import RegisterPage from "./pages/Register.jsx";
 import ErrorPage from "./pages/404.jsx";
 import { Provider } from "react-redux";
 import store from "./redux/store/store.js";
@@ -20,18 +20,18 @@ const persistor = persistStore(store);
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
-    children:[
+    children: [
       {
         path: "/",
-        element: <App/>,
+        element: <App />,
       },
       {
         path: "/topup",
-        element: <TopUpPage/>,
+        element: <TopUpPage />,
       },
       {
         path: "/transaction",
-        element: <TransactionPage/>,
+        element: <TransactionPage />,
       },
     ],
     errorElement: <ErrorPage />,
