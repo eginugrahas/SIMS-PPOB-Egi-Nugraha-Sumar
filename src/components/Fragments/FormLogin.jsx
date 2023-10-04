@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Input from "../Elements/Input";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../api";
-import { loginSuccess } from "../../redux/slices/userSlice";
+import { loginUser } from "../../api/auth";
+import { loginFailure, loginSuccess } from "../../redux/slices/authSlice";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function FormLogin() {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,9 +23,12 @@ function FormLogin() {
     e.preventDefault();
     try {
       const response = await loginUser(formData).then((res) => {
-        if (res.status === 200) {
+        if (res.status === 0) {
           dispatch(loginSuccess(res));
+          toast.success("Login berhasil");
+          navigate("/");
         } else {
+          dispatch(loginFailure(res));
           toast((t) => (
             <div className="flex items-center w-full rounded text-red text-sm gap-5">
               <div>{res.message}</div>

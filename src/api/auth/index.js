@@ -14,7 +14,7 @@ export const loginUser = async (formData) => {
 
 export const registerUser = async (formData) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/register`, formData);
+      const response = await axios.post(`${API_BASE_URL}/registration`, formData);
       return response.data; 
     } catch (error) {
       return error.response.data;
