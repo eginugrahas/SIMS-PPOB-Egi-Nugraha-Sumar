@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import Header from "../components/Elements/Header";
 import ProfileHero from "../components/Elements/ProfileHero";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 function MainLayout() {
   const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
-      window.location.href = "/login";
+      navigate("/login")
     }
   }, [token]);
   return (
