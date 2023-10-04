@@ -4,16 +4,16 @@ import { getUser } from "../../api/user";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: null,
+    data: null,
     error: null,
   },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload.data;
+      state.data = action.payload.data;
       state.error = null;
     },
     logOutUser: (state) => {
-      state.user = null;
+      state.data = null;
       state.error = null;
     }
   },

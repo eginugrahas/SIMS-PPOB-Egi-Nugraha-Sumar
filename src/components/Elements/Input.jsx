@@ -10,7 +10,7 @@ function Input(props) {
     visibility,
     value,
     onChange,
-    passwordValue
+    passwordValue,
   } = props;
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -26,7 +26,7 @@ function Input(props) {
 
   function handleBlur() {
     setIsFocused(false);
-    validateInput(name, value); // Validate input on blur
+    validateInput(name, value);
   }
 
   function validateInput(name, value) {
@@ -41,9 +41,14 @@ function Input(props) {
       newErrorMessage =
         value.trim().length >= 8 ? "" : "Password harus minimal 8 karakter";
     } else if (name === "confirm_password") {
-      // Replace "value" with the actual value to compare with
+      newErrorMessage = value === passwordValue ? "" : "Password tidak cocok";
+    } else if (name === "top_up_amount") {
       newErrorMessage =
-        value === passwordValue ? "" : "Password tidak cocok";
+        value < 10000
+          ? "Nominal minimal Rp10.000"
+          : value > 1000000
+          ? "Nominal maksimal Rp1.000.000"
+          : "";
     }
 
     setErrorMessage(newErrorMessage);

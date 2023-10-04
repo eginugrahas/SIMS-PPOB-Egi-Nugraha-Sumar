@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Elements/Header";
 import ProfileHero from "../components/Elements/ProfileHero";
 import { useSelector } from "react-redux";
@@ -6,15 +6,12 @@ import { Outlet } from "react-router-dom";
 
 
 function MainLayout() {
-  const user = useSelector((state) => state.user);
-  const balance = useSelector((state) => state.transaction.balance);
-  console.log(balance)
   return (
     <div className="min-h-screen">
       <Header />
       <div className="border-b border-gray"></div>
       <div className="py-5 px-[10%]">
-        <ProfileHero user={user.user} balance={balance.balance} />
+        <ProfileHero />
         <Outlet />
       </div>
     </div>

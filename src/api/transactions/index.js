@@ -16,14 +16,30 @@ export const getBalance = async (token) => {
 };
 
 export const getTransactionHistory = async (token) => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}/transaction/history?offset=0&limit=5`, {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}/transaction/history?offset=0&limit=5`,
+      {
         headers: {
-            Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-        });
-        return response.data;
-    } catch (error) {
-        return error.response.data;
-    }   
-}
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const topUp = async (token, amount) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/topup`, amount, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};

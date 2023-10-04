@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import photoProfile from "../../assets/Profile Photo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBalance } from "../../redux/slices/transactionSlice";
+import { parsingRibuan } from "../../helpers";
 
-function ProfileHero(props) {
-  const { user, balance } = props;
+function ProfileHero() {
+  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.user);
+  const balance = useSelector((state) => state.transaction.balance);
+  const dispatch = useDispatch();
   const [saldoVisibility, setSaldoVisibility] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchBalance(token))
+  }, [])
+  
   return (
     <div className="flex justify-between items-center mb-10">
       <div className="flex flex-col w-[40%]">
@@ -11,7 +22,7 @@ function ProfileHero(props) {
           <img src={photoProfile} alt="userPhoto" />
           <div className="text-xl font-medium mt-4">Selamat datang,</div>
           <div className="text-4xl font-semibold mt-2">
-            {user.first_name} {user.last_name}
+            {user.user.first_name} {user.user.last_name}
           </div>
         </div>
       </div>
@@ -23,7 +34,7 @@ function ProfileHero(props) {
               Rp{" "}
               <span className="ml-2">
                 {saldoVisibility
-                  ? balance
+                  ? parsingRibuan(balance.balance)
                   : `\u2022 \u2022 \u2022 \u2022 \u2022 \u2022`}
               </span>
             </div>
