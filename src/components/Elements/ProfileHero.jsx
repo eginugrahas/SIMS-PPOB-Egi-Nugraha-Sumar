@@ -6,7 +6,7 @@ function ProfileHero(props) {
   const [saldoVisibility, setSaldoVisibility] = useState(false);
   return (
     <div className="flex justify-between items-center mb-10">
-      <div className="flex flex-col w-[40%">
+      <div className="flex flex-col w-[40%]">
         <div className="rounded-full border-dark-gray">
           <img src={photoProfile} alt="userPhoto" />
           <div className="text-xl font-medium mt-4">Selamat datang,</div>

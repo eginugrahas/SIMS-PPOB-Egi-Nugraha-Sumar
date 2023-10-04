@@ -67,6 +67,8 @@ function Input(props) {
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          min={type === "number" ? 10000 : null}
+          max={type === "number" ? 1000000 : null}
           className={`${cn} outline-none placeholder:text-xs placeholder:text-gray text-sm font-medium`}
         />
         {visibility && (
