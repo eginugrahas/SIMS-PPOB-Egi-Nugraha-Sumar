@@ -5,14 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { getBanner, getServices } from "./api/informations";
 
 function App() {
-  const token = useSelector((state) => state.auth.token);
-  const navigate = useNavigate();
   const [services, setServices] = useState([]);
   const [banners, setBanners] = useState([]);
   useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
     const fetchServices = async () => {
       try {
         const service = await getServices(token);
@@ -24,7 +19,7 @@ function App() {
       }
     };
     fetchServices();
-  }, [token]);
+  }, []);
 
   return (
     <div className="flex flex-col gap-5">

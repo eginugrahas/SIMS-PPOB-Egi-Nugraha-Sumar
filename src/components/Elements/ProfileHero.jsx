@@ -22,7 +22,7 @@ function ProfileHero() {
           <img src={photoProfile} alt="userPhoto" />
           <div className="text-xl font-medium mt-4">Selamat datang,</div>
           <div className="text-4xl font-semibold mt-2">
-            {user.data.first_name} {user.data.last_name}
+            {user.data ? user.data.first_name : ""} {user.data ? user.data.last_name : ""}
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ function ProfileHero() {
               Rp{" "}
               <span className="ml-2">
                 {saldoVisibility
-                  ? parsingRibuan(balance.balance)
+                  ? parsingRibuan(balance.balance ? balance.balance : 0)
                   : `\u2022 \u2022 \u2022 \u2022 \u2022 \u2022`}
               </span>
             </div>
