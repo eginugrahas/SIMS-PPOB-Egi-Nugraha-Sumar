@@ -19,10 +19,6 @@ const persistor = persistStore(store);
 
 const router = createBrowserRouter([
   {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
     element: <MainLayout />,
     children: [
       {
@@ -39,6 +35,10 @@ const router = createBrowserRouter([
       },
     ],
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
   },
   {
     path: "/account",
