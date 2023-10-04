@@ -4,12 +4,8 @@ import logo from "../assets/Logo.png";
 import FormLogin from "../components/Fragments/FormLogin";
 import { Link } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
 
 function LoginPage() {
-  const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.auth.token);
-  console.log(user);
   return (
     <div className="grid grid-cols-2 max-h-screen">
       <div className="flex flex-col gap-7 justify-center items-center">
