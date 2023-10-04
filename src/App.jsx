@@ -7,9 +7,7 @@ import { logout } from "./redux/slices/authSlice";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log(token, user);
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {

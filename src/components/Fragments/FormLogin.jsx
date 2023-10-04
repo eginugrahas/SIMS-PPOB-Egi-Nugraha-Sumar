@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Input from "../Elements/Input";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../api/auth";
-import { loginFailure, loginSuccess } from "../../redux/slices/authSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../redux/slices/authSlice";
 
 function FormLogin() {
   const dispatch = useDispatch();
@@ -22,25 +21,29 @@ function FormLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser(formData).then((res) => {
-        if (res.status === 0) {
-          dispatch(loginSuccess(res));
+      dispatch(login(formData)).then((res) => {
+        if (res.type === "auth/loginSuccess") {
           toast.success("Login berhasil");
           navigate("/");
         } else {
-          dispatch(loginFailure(res));
-          toast((t) => (
-            <div className="flex items-center w-full rounded text-red text-sm gap-5">
-              <div>{res.message}</div>
-              <button className="font-bold" onClick={() => toast.dismiss(t.id)}>
-                X
-              </button>
-            </div>
-          ), {
-            style: {
-              background: '#FFCBC8',
+          toast(
+            (t) => (
+              <div className="flex items-center w-full rounded text-red text-sm gap-5">
+                <div>{res.payload}</div>
+                <button
+                  className="font-bold"
+                  onClick={() => toast.dismiss(t.id)}
+                >
+                  X
+                </button>
+              </div>
+            ),
+            {
+              style: {
+                background: "#FFCBC8",
+              },
             }
-          });
+          );
         }
       });
     } catch (error) {
