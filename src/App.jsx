@@ -1,22 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "./layout/mainLayout";
+import { logout } from "./redux/slices/authSlice";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  console.log(token, user);
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
-  }, []);
+  }, [token]);
 
   return (
     <>
       <MainLayout>
-        Home
+        <button className="border rounded p-2 bg-red text-white" onClick={()=>dispatch(logout())}>Logout</button>
       </MainLayout>
     </>
   );

@@ -13,3 +13,13 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.saldoHero{
+  background-image: url("/src/assets/Background\ Saldo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+  width: 100%;
+  min-height: 160px;
+  border-radius: 10px;
+}

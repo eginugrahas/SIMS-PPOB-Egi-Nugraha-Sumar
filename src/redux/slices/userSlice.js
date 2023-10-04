@@ -4,45 +4,20 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: null,
-    isLoggedIn: false,
-    error: null, 
+    error: null,
   },
   reducers: {
-    loginSuccess: (state, action) => {
-      console.log(action.payload);
-      state.user = action.payload;
-      state.isLoggedIn = true;
+    setUser: (state, action) => {
+      state.user = action.payload.data;
       state.error = null;
     },
-    loginFailure: (state, action) => {
+    logOutUser: (state) => {
       state.user = null;
-      state.isLoggedIn = false;
-      state.error = action.payload;
-    },
-    registerSuccess: (state, action) => {
-      state.user = action.payload;
-      state.isLoggedIn = false;
       state.error = null;
-    },
-    registerFailure: (state, action) => {
-      state.user = null;
-      state.isLoggedIn = false;
-      state.error = action.payload;
-    },
-    logout: (state) => {
-      state.user = null;
-      state.isLoggedIn = false;
-      state.error = null;
-    },
+    }
   },
 });
 
-export const {
-  loginSuccess,
-  loginFailure,
-  registerSuccess,
-  registerFailure,
-  logout,
-} = userSlice.actions;
+export const {setUser,logOutUser} = userSlice.actions;
 
 export default userSlice.reducer;
