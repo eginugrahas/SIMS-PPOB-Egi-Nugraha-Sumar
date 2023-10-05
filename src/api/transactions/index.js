@@ -15,10 +15,10 @@ export const getBalance = async (token) => {
   }
 };
 
-export const getTransactionHistory = async (token) => {
+export const getTransactionHistory = async (token, offset) => {
   try {
     const response = await axios.get(
-      `${API_BASE_URL}/transaction/history?offset=0&limit=5`,
+      `${API_BASE_URL}/transaction/history?offset=${offset}&limit=5`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

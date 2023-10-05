@@ -6,6 +6,8 @@ import thunk from "redux-thunk";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
+import balanceSlice from "../slices/balanceSlice";
+
 
 const persistConfig = {
   key: "root",
@@ -17,6 +19,7 @@ const reducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   transaction: transactionReducer,
+  balance: balanceSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

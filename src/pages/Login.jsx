@@ -1,6 +1,6 @@
 import React from "react";
-import illusration from "../../public/Illustrasi Login.png";
-import logo from "../../public/Logo.png";
+import illusration from "/Illustrasi Login.png";
+import logo from "/Logo.png";
 import FormLogin from "../components/Fragments/FormLogin";
 import { Link } from "react-router-dom";
 import { Toaster } from "react-hot-toast";

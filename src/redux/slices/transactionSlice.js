@@ -1,35 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getBalance } from "../../api/transactions";
+import {  getTransactionHistory } from "../../api/transactions";
 
 const transactionSlice = createSlice({
   name: "transaction",
   initialState: {
-    balance: null,
     transaction: null,
     error: null,
   },
   reducers: {
     setTransaction: (state, action) => {
-      state.balance = action.payload.data;
-      state.transaction = action.payload.data;
+      state.transaction = action.payload.transaction;
       state.error = null;
+    },
+    rejectedTransaction: (state, action) => {
+      state.transaction = null;
+      state.error = action.payload;
     },
   },
 });
 
-export const fetchBalance = (token) => async (dispatch) => {
+export const fetchTransactions = ({token, offset}) => async (dispatch) => {
   try {
-    const response = await getBalance(token);
-    if (response.status === 0) {
-      return dispatch(setTransaction(response));
+    const transaction = await getTransactionHistory(token, offset);
+    if (transaction.status === 0) {
+      return dispatch(
+        setTransaction({ transaction: transaction.data.records })
+      );
     } else {
-      return dispatch(setTransaction(response.message));
+      return dispatch(setTransaction(transaction.data.message));
     }
   } catch (error) {
     console.log(error);
+    return dispatch(setTransaction(error));
   }
 };
 
-export const { setTransaction } = transactionSlice.actions;
+export const { setTransaction, rejectedTransaction } = transactionSlice.actions;
 
 export default transactionSlice.reducer;

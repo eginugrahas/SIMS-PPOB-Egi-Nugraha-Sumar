@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import photoProfile from "/Profile Photo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBalance } from "../../redux/slices/transactionSlice";
+import { fetchBalance } from "../../redux/slices/balanceSlice";
 import { parsingRibuan } from "../../helpers";
 
 function ProfileHero() {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.user);
-  const balance = useSelector((state) => state.transaction.balance);
+  const balance = useSelector((state) => state.balance);
   const dispatch = useDispatch();
   const [saldoVisibility, setSaldoVisibility] = useState(false);
 

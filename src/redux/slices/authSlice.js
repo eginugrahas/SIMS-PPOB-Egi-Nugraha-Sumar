@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser } from "../../api/auth/index";
 import { fetchUserData } from "./userSlice";
-import { fetchBalance } from "./transactionSlice";
+import { fetchBalance } from "./balanceSlice";
 
 
 const authSlice = createSlice({
