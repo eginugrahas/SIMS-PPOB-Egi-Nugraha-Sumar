@@ -22,6 +22,7 @@ const transactionSlice = createSlice({
 export const fetchTransactions = ({token, offset}) => async (dispatch) => {
   try {
     const transaction = await getTransactionHistory(token, offset);
+    console.log(transaction, "transaction in slice")
     if (transaction.status === 0) {
       return dispatch(
         setTransaction(transaction.data.records)
