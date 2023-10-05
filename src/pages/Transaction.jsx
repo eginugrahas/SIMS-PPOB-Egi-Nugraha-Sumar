@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 function TransactionPage() {
   const token = useSelector((state) => state.auth.token);
   const transaction = useSelector((state) => state.transaction.transaction);
+  const [transactions, setTransactions] = useState([]);
   const [offset, setOffset] = useState(0);
   const dispatch = useDispatch();
   function handleShowMore() {
@@ -14,14 +15,17 @@ function TransactionPage() {
     dispatch(fetchTransactions({ token, offset: offset }));
   }
   useEffect(() => {
-    dispatch(fetchTransactions({ token, offset: offset }));
+    dispatch(fetchTransactions({ token, offset: offset })).then((res) => {
+      console.log(res, 'res')
+      setTransactions(res);
+    })
   }, []);
 
   return (
     <div className="">
       <div className="text-lg my-3">Semua Transaksi</div>
       <div className="flex flex-col gap-4">
-        {transaction.map((item) => {
+        {transactions.map((item) => {
           return (
             <div
               key={item.invoice_number}
@@ -49,7 +53,7 @@ function TransactionPage() {
       </div>
       <div
         className={`text-center text-red text-sm mt-4 cursor-pointer ${
-          transaction ? (transaction.length < 5 ? "" : "hidden") : "hidden"
+          transactions ? (transactions.length < 5 ? "" : "hidden") : "hidden"
         }`}
         onClick={handleShowMore}
       >

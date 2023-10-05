@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {  getTransactionHistory } from "../../api/transactions";
+import { getTransactionHistory } from "../../api/transactions";
 
 const transactionSlice = createSlice({
   name: "transaction",
@@ -19,22 +19,22 @@ const transactionSlice = createSlice({
   },
 });
 
-export const fetchTransactions = ({token, offset}) => async (dispatch) => {
-  try {
-    const transaction = await getTransactionHistory(token, offset);
-    console.log(transaction, "transaction in slice")
-    if (transaction.status === 0) {
-      return dispatch(
-        setTransaction(transaction.data.records)
-      );
-    } else {
-      return dispatch(setTransaction(transaction.data.message));
+export const fetchTransactions =
+  ({ token, offset }) =>
+  async (dispatch) => {
+    try {
+      const transaction = await getTransactionHistory(token, offset);
+      if (transaction.status === 0) {
+        dispatch(setTransaction(transaction.data.records));
+        return transaction.data.records;
+      } else {
+        return dispatch(setTransaction(transaction.data.message));
+      }
+    } catch (error) {
+      console.log(error);
+      return dispatch(setTransaction(error));
     }
-  } catch (error) {
-    console.log(error);
-    return dispatch(setTransaction(error));
-  }
-};
+  };
 
 export const { setTransaction, rejectedTransaction } = transactionSlice.actions;
 
