@@ -12,11 +12,12 @@ function TransactionPage() {
   const dispatch = useDispatch();
   function handleShowMore() {
     setOffset(offset + 5);
-    dispatch(fetchTransactions({ token, offset: offset }));
+    dispatch(fetchTransactions({ token, offset: offset })).then((res) => {
+      setTransactions(res)
+    });
   }
   useEffect(() => {
     dispatch(fetchTransactions({ token, offset: offset })).then((res) => {
-      console.log(res, "res");
       setTransactions(res);
     });
   }, []);
