@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { formatDateTime } from "../helpers";
+import { formatDateTime, parsingRibuan } from "../helpers";
 import { fetchTransactions } from "../redux/slices/transactionSlice";
 import { useDispatch } from "react-redux";
 
@@ -37,7 +37,7 @@ function TransactionPage() {
                     } font-medium `}
                   >
                     {item.transaction_type === "TOPUP" ? "+ " : "- "}
-                    {item.total_amount}
+                    Rp{parsingRibuan(item.total_amount)}
                   </div>
                   <div className="text-xs text-gray">
                     {formatDateTime(item.created_on)}

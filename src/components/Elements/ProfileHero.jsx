@@ -32,7 +32,7 @@ function ProfileHero() {
             alt="userPhoto"
           />
           <div className="text-xl font-medium mt-4">Selamat datang,</div>
-          <div className="text-4xl font-semibold mt-2">
+          <div className="text-3xl font-semibold mt-2">
             {user ? user.first_name : ""}{" "}
             {user ? user.last_name : ""}
           </div>

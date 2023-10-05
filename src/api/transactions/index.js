@@ -43,3 +43,20 @@ export const topUp = async (token, amount) => {
     return error.response.data;
   }
 };
+
+export const serviceTransaction = async (token, service_code) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/transaction`,
+      { service_code: service_code },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};

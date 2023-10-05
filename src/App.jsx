@@ -2,11 +2,13 @@ import { useSelector } from "react-redux";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { getBanner, getServices } from "./api/informations";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
   const [banners, setBanners] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -21,6 +23,10 @@ function App() {
     fetchServices();
   }, []);
 
+  function handleSelectService(service_code) {
+    navigate(`/service/${service_code}`);
+  }
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-start justify-between">
@@ -28,7 +34,7 @@ function App() {
           return (
             <div
               className="text-center flex flex-col items-center justify-center cursor-pointer"
-              key={service.service_code}
+              key={service.service_code} onClick={()=>handleSelectService(service.service_code)}
             >
               <img
                 src={`${service.service_name}.png`}

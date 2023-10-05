@@ -43,8 +43,27 @@ function Modal({ isOpen, onClose, type, amount, onSubmit, status, service }) {
       }
       break;
     case "service":
-      content.title = `Beli ${service} senilai`;
-      content.button = "Ya, lanjutkan Bayar";
+      switch (status) {
+        case "pending":
+          content.title = `Beli ${service} senilai`;
+          content.button = "Ya, lanjutkan Bayar";
+          content.imgStatus = "Logo";
+          break;
+        case "success":
+          content.title = `Bayar ${service} sebesar`;
+          content.desc = "berhasil";
+          content.button = "Kembali ke Beranda";
+          content.imgStatus = "success";
+          break;
+        case "rejected":
+          content.title = `Bayar ${service} sebesar`;
+          content.desc = "gagal";
+          content.imgStatus = "rejected";
+          content.button = "Kembali ke Beranda";
+          break;
+        default:
+          break;
+      }
       break;
     default:
       break;
@@ -56,12 +75,20 @@ function Modal({ isOpen, onClose, type, amount, onSubmit, status, service }) {
         className="modal-content flex flex-col gap-5 items-center py-5 px-10"
         onClick={(e) => e.stopPropagation()}
       >
-        <img src={`${content.imgStatus}.png`} alt="logo" width={50} height={50} />
+        <img
+          src={`/${content.imgStatus}.png`}
+          alt="logo"
+          width={50}
+          height={50}
+        />
         <div className="text-center">
           <div className="text-sm">{content.title}</div>
-          <div className="font-semibold text-xl">Rp{parsingRibuan(content.amount)} {status != "pending" ? "" : "?"}</div>
-          <div className="text-sm">{status != "pending" ? content.desc : ""}</div>
-
+          <div className="font-semibold text-xl">
+            Rp{parsingRibuan(content.amount)} {status != "pending" ? "" : "?"}
+          </div>
+          <div className="text-sm">
+            {status != "pending" ? content.desc : ""}
+          </div>
         </div>
         <button
           className="text-red font-medium"

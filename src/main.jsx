@@ -15,6 +15,7 @@ import TopUpPage from "./pages/TopUp.jsx";
 import TransactionPage from "./pages/Transaction.jsx";
 import AccountPage from "./pages/Account.jsx";
 import AccountLayout from "./layout/accountLayout.jsx";
+import ServiceTransaction from "./pages/Service.jsx";
 
 const persistor = persistStore(store);
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         path: "/transaction",
         element: <TransactionPage />,
       },
+      {
+        path: "/service/:service_code",
+        element: <ServiceTransaction />,
+      }
     ],
     errorElement: <ErrorPage />,
   },
