@@ -29,7 +29,7 @@ const userSlice = createSlice({
 export const fetchUserData = (token) => async (dispatch) => {
   try {
     const response = await getUser(token)
-    console.log(response, "response")
+    // console.log(response, "response")
     if(response.status === 0){
       return dispatch(setUser(response));
     }

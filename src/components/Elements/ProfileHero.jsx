@@ -3,26 +3,38 @@ import photoProfile from "/Profile Photo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBalance } from "../../redux/slices/balanceSlice";
 import { parsingRibuan } from "../../helpers";
+import { fetchUserData } from "../../redux/slices/userSlice";
 
 function ProfileHero() {
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.data);
   const balance = useSelector((state) => state.balance);
+  const [hasImage, setHasImage] = useState(false);
   const dispatch = useDispatch();
   const [saldoVisibility, setSaldoVisibility] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchBalance(token))
-  }, [])
-  
+    dispatch(fetchBalance(token));
+    dispatch(fetchUserData(token));
+    if (user) {
+      if (!user.profile_image.includes("null")) {
+        setHasImage(true);
+      }
+    }
+  }, []);
+
   return (
     <div className="flex justify-between items-center mb-10">
       <div className="flex flex-col w-[40%]">
         <div className="rounded-full border-dark-gray">
-          <img src={photoProfile} alt="userPhoto" />
+          <img
+            src={hasImage ? user.profile_image : "/Profile Photo.png"}
+            alt="userPhoto"
+          />
           <div className="text-xl font-medium mt-4">Selamat datang,</div>
           <div className="text-4xl font-semibold mt-2">
-            {user.data ? user.data.first_name : ""} {user.data ? user.data.last_name : ""}
+            {user ? user.first_name : ""}{" "}
+            {user ? user.last_name : ""}
           </div>
         </div>
       </div>
@@ -40,7 +52,10 @@ function ProfileHero() {
             </div>
             <div className="text-white text-sm font-medium">
               <span className="">Lihat Saldo</span>{" "}
-              <span className="ml-2 cursor-pointer" onClick={()=>setSaldoVisibility(!saldoVisibility)}>
+              <span
+                className="ml-2 cursor-pointer"
+                onClick={() => setSaldoVisibility(!saldoVisibility)}
+              >
                 <i className="icon-visibility"></i>
               </span>
             </div>

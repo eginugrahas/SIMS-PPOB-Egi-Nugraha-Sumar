@@ -34,15 +34,12 @@ export const updateUser = async (token, formData) => {
 
 export const uploadImage = async (token, formData) => {
   try {
-    const response = await axios.put(
-      `${API_BASE_URL}/profile/image`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.put(`${API_BASE_URL}/profile/image`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     return error.response.data;
