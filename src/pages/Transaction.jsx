@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 function TransactionPage() {
   const token = useSelector((state) => state.auth.token);
   const transaction = useSelector((state) => state.transaction.transaction);
-  console.log(transaction);
+  console.log(transaction, "transaction");
   const [offset, setOffset] = useState(0);
   const dispatch = useDispatch();
   function handleShowMore() {

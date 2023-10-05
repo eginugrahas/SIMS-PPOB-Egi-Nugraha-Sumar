@@ -9,7 +9,7 @@ const transactionSlice = createSlice({
   },
   reducers: {
     setTransaction: (state, action) => {
-      state.transaction = action.payload.transaction;
+      state.transaction = action.payload;
       state.error = null;
     },
     rejectedTransaction: (state, action) => {
@@ -24,7 +24,7 @@ export const fetchTransactions = ({token, offset}) => async (dispatch) => {
     const transaction = await getTransactionHistory(token, offset);
     if (transaction.status === 0) {
       return dispatch(
-        setTransaction({ transaction: transaction.data.records })
+        setTransaction(transaction.data.records)
       );
     } else {
       return dispatch(setTransaction(transaction.data.message));

@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getBalance } from "../../api/transactions";
 
 const balanceSlice = createSlice({
-  name: "balacne",
+  name: "balance",
   initialState: {
     balance: null,
     error: null,
   },
   reducers: {
     setBalance: (state, action) => {
-      state.balance = action.payload.balance;
+      state.balance = action.payload;
       state.error = null;
     },
     rejectedBalance: (state, action) => {
@@ -24,7 +24,7 @@ export const fetchBalance = (token) => async (dispatch) => {
     const balance = await getBalance(token);
     if (balance.status === 0) {
       return dispatch(
-        setBalance({ balance: balance.data.balance })
+        setBalance(balance.data.balance)
       );
     } else {
       return dispatch(rejectedBalance(balance.data.message));
