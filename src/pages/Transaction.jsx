@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 function TransactionPage() {
   const token = useSelector((state) => state.auth.token);
-  const transaction = useSelector((state) => state.transaction.transaction);
+  const transaction = useSelector((state) => state.transaction);
   const transactions = transaction
   console.log(transactions, "transaction");
   const [offset, setOffset] = useState(0);
