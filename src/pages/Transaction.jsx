@@ -16,9 +16,9 @@ function TransactionPage() {
   }
   useEffect(() => {
     dispatch(fetchTransactions({ token, offset: offset })).then((res) => {
-      console.log(res, 'res')
+      console.log(res, "res");
       setTransactions(res);
-    })
+    });
   }, []);
 
   return (
@@ -53,7 +53,7 @@ function TransactionPage() {
       </div>
       <div
         className={`text-center text-red text-sm mt-4 cursor-pointer ${
-          transactions ? (transactions.length < 5 ? "" : "hidden") : "hidden"
+          transactions.length < 5 ? "" : "hidden"
         }`}
         onClick={handleShowMore}
       >
