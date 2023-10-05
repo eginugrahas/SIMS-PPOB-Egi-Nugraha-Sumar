@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import Input from "../Elements/Input";
-import { registerUser } from "../../api/auth";
 import { registerFailure, registerSuccess } from "../../redux/slices/authSlice";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { updateUser } from "../../api/user";
+import { useSelector } from "react-redux";
+import { setUser, updateUserData } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
-function FormRegister() {
+function FormEdit({ user, isDisabled, setIsDisabled }) {
+  const token = useSelector((state) => state.auth.token);
   const [formData, setFormData] = useState({
-    email: "",
-    first_name: "",
-    last_name: "",
-    password: "",
-    confirm_password: "",
+    email: user.email,
+    first_name: user.first_name,
+    last_name: user.last_name,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,16 +29,11 @@ function FormRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { confirm_password, ...newFormData } = formData;
-      const response = await registerUser(newFormData).then((res) => {
-        console.log(res);
-        if (res.status === 0) {
-          console.log("berhasil");
-          dispatch(registerSuccess(res));
-          toast.success("Registrasi berhasil");
-          navigate("/login");
+      dispatch(updateUserData(token, formData)).then((res) => {
+        if (res.payload.status === 0) {
+          setIsDisabled(true);
+          toast.success("Update profil berhasil");
         } else {
-          dispatch(registerFailure(res));
           toast(
             (t) => (
               <div className="flex items-center w-full rounded text-red text-sm gap-5">
@@ -63,7 +59,7 @@ function FormRegister() {
     }
   };
   return (
-    <div className="flex flex-col w-72">
+    <div className="flex flex-col w-[60%]">
       <form onSubmit={handleSubmit}>
         <Input
           type="email"
@@ -71,6 +67,7 @@ function FormRegister() {
           placeholder="masukan email anda"
           icon="icon-at"
           value={formData.email}
+          isDisabled={isDisabled}
           onChange={handleInputChange}
         />
         <Input
@@ -79,6 +76,7 @@ function FormRegister() {
           placeholder="nama depan"
           icon="icon-account"
           value={formData.first_name}
+          isDisabled={isDisabled}
           onChange={handleInputChange}
         />
         <Input
@@ -87,36 +85,20 @@ function FormRegister() {
           placeholder="nama belakang"
           icon="icon-account"
           value={formData.last_name}
-          onChange={handleInputChange}
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="buat password"
-          icon="icon-lock"
-          visibility={true}
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <Input
-          type="password"
-          name="confirm_password"
-          placeholder="konfirmasi password"
-          icon="icon-lock"
-          visibility={true}
-          value={formData.confirm_password}
-          passwordValue={formData.password}
+          isDisabled={isDisabled}
           onChange={handleInputChange}
         />
         <button
           type="submit"
-          className="rounded bg-red text-center p-2 text-sm text-white mt-3 w-full font-medium"
+          className={`rounded bg-red text-center p-2 text-sm text-white mt-3 font-medium w-full ${
+            isDisabled ? "hidden" : ""
+          }`}
         >
-          Registrasi
+          Simpan
         </button>
       </form>
     </div>
   );
 }
 
-export default FormRegister;
+export default FormEdit;

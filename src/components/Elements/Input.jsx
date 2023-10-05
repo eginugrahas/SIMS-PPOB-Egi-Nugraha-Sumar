@@ -11,6 +11,7 @@ function Input(props) {
     value,
     onChange,
     passwordValue,
+    isDisabled
   } = props;
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -72,9 +73,10 @@ function Input(props) {
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          disabled={isDisabled}
           min={type === "number" ? 10000 : null}
           max={type === "number" ? 1000000 : null}
-          className={`${cn} outline-none placeholder:text-xs placeholder:text-gray text-sm font-medium`}
+          className={`${cn} outline-none placeholder:text-xs placeholder:text-gray text-sm font-medium w-full`}
         />
         {visibility && (
           <i

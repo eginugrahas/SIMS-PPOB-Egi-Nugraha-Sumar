@@ -14,6 +14,7 @@ import MainLayout from "./layout/mainLayout.jsx";
 import TopUpPage from "./pages/TopUp.jsx";
 import TransactionPage from "./pages/Transaction.jsx";
 import AccountPage from "./pages/Account.jsx";
+import AccountLayout from "./layout/accountLayout.jsx";
 
 const persistor = persistStore(store);
 
@@ -41,8 +42,13 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/account",
-    element: <AccountPage />,
+    element: <AccountLayout />,
+    children: [
+      {
+        path: "/account",
+        element: <AccountPage />,
+      },
+    ],
   },
   {
     path: "/register",

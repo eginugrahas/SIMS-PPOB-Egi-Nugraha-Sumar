@@ -51,35 +51,33 @@ function FormLogin() {
     }
   };
   return (
-    <>
+    <div className="flex flex-col gap-5 w-72">
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-5 w-72">
-          <Input
-            type="email"
-            name="email"
-            placeholder="masukan email anda"
-            icon="icon-at"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-          <Input
-            type="password"
-            name="password"
-            placeholder="masukan password anda"
-            icon="icon-lock"
-            visibility={true}
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-          <button
-            type="submit"
-            className="rounded bg-red text-center p-2 text-sm text-white mt-3"
-          >
-            Masuk
-          </button>
-        </div>
+        <Input
+          type="email"
+          name="email"
+          placeholder="masukan email anda"
+          icon="icon-at"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="masukan password anda"
+          icon="icon-lock"
+          visibility={true}
+          value={formData.password}
+          onChange={handleInputChange}
+        />
+        <button
+          type="submit"
+          className="rounded bg-red text-center p-2 text-sm text-white mt-3 w-full font-medium"
+        >
+          Masuk
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 

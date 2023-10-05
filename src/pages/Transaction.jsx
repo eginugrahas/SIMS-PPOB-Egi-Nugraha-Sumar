@@ -7,21 +7,14 @@ import { useDispatch } from "react-redux";
 function TransactionPage() {
   const token = useSelector((state) => state.auth.token);
   const transaction = useSelector((state) => state.transaction.transaction);
+  const [offset, setOffset] = useState(0);
   const dispatch = useDispatch();
-  const [params, setParams] = useState({
-    token: token,
-    offset: 0,
-  });
   function handleShowMore() {
-    const nextOffset = params.offset + 5;
-    setParams({
-      ...params,
-      offset: nextOffset,
-    });
-    dispatch(fetchTransactions(params));
+    setOffset(offset + 5);
+    dispatch(fetchTransactions({ token, offset: offset }));
   }
   useEffect(() => {
-    dispatch(fetchTransactions(params));
+    dispatch(fetchTransactions({ token, offset: offset }));
   }, []);
 
   return (
@@ -32,7 +25,7 @@ function TransactionPage() {
           transaction.map((item) => {
             return (
               <div
-                id={item.invoice_number}
+                key={item.invoice_number}
                 className="border flex justify-between border-gray rounded p-3 w-full items-center"
               >
                 <div className="">
@@ -59,7 +52,9 @@ function TransactionPage() {
         )}
       </div>
       <div
-        className={`text-center text-red text-sm mt-4 cursor-pointer ${transaction.length < 5 && "hidden"}`}
+        className={`text-center text-red text-sm mt-4 cursor-pointer ${
+          transaction.length < 5 && "hidden"
+        }`}
         onClick={handleShowMore}
       >
         Show more
