@@ -53,7 +53,7 @@ function TransactionPage() {
       </div>
       <div
         className={`text-center text-red text-sm mt-4 cursor-pointer ${
-          transactions.length < 5 ? "" : "hidden"
+          transactions.length < 5 ? "hidden" : ""
         }`}
         onClick={handleShowMore}
       >
