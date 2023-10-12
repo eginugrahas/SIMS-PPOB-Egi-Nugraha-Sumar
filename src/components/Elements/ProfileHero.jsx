@@ -30,6 +30,9 @@ function ProfileHero() {
           <img
             src={hasImage ? user.profile_image : "/Profile Photo.png"}
             alt="userPhoto"
+            width={70}
+            height={70}
+            style={{borderRadius: "50%"}}
           />
           <div className="text-xl font-medium mt-4">Selamat datang,</div>
           <div className="text-3xl font-semibold mt-2">

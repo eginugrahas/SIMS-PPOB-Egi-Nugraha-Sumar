@@ -76,6 +76,7 @@ function AccountPage() {
               alt="profile photo"
               width={100}
               height={100}
+              style={{borderRadius: "50%"}}
               className="hover:brightness-75"
             />
             <i className="icon-pencil rounded-full border border-dark-gray p-1 bg-white absolute right-0 bottom-1"></i>
