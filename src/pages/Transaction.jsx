@@ -30,7 +30,7 @@ function TransactionPage() {
           return (
             <div
               key={item.invoice_number}
-              className="border flex justify-between border-gray rounded p-3 w-full items-center"
+              className="border flex border-gray rounded justify-between p-3 w-full items-center"
             >
               <div className="">
                 <div
@@ -47,7 +47,7 @@ function TransactionPage() {
                   {formatDateTime(item.created_on)}
                 </div>
               </div>
-              <div className="text-sm">{item.description}</div>
+              <div className="text-xs">{item.description.replace(/Berlangganan/g, "").replace(/Balance/g, "")}</div>
             </div>
           );
         })}
