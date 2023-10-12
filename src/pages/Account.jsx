@@ -66,7 +66,7 @@ function AccountPage() {
     <>
       <Toaster />
       {user ? (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center w-full">
           <div
             className="relative border border-gray rounded-full bg-white cursor-pointer "
             onClick={handleChangePhoto}
@@ -89,7 +89,7 @@ function AccountPage() {
             isDisabled={isDisabled}
             setIsDisabled={setIsDisabled}
           />
-          <div className="mt-5 w-[60%]">
+          <div className="mt-5 w-full md:w-[60%]">
             <button
               className={`bg-red rounded p-2 text-white text-sm font-medium text-center w-full mb-3 ${
                 isDisabled ? "" : "hidden"

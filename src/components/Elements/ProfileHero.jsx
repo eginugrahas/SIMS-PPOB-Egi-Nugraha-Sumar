@@ -24,28 +24,31 @@ function ProfileHero() {
   }, []);
 
   return (
-    <div className="flex justify-between items-center mb-10">
-      <div className="flex flex-col w-[40%]">
+    <div className="md:flex lg:flex flex-col md:flex-row justify-between items-center mb-5 md:mb-10">
+      <div className="flex md:flex-col w-full md:w-[40%] lg:w-[40%] gap-4">
         <div className="rounded-full border-dark-gray">
           <img
             src={hasImage ? user.profile_image : "/Profile Photo.png"}
             alt="userPhoto"
             width={70}
             height={70}
-            style={{borderRadius: "50%"}}
+            style={{ borderRadius: "50%" }}
           />
-          <div className="text-xl font-medium mt-4">Selamat datang,</div>
-          <div className="text-3xl font-semibold mt-2">
-            {user ? user.first_name : ""}{" "}
-            {user ? user.last_name : ""}
+        </div>
+        <div className="flex flex-col">
+          <div className="text-lg md:text-xl font-medium md:mt-2">
+            Selamat datang,
+          </div>
+          <div className="text-2xl md:text-3xl font-semibold md:mt-2">
+            {user ? user.first_name : ""} {user ? user.last_name : ""}
           </div>
         </div>
       </div>
-      <div className="flex w-[60%]">
-        <div className="saldoHero p-6">
-          <div className="bg-[#F13B2F] flex flex-col gap-3 w-[65%]">
-            <div className="text-white text-lg font-medium">Saldo anda</div>
-            <div className="text-white text-3xl font-medium">
+      <div className="flex w-full md:w-[60%] mt-2 md:mt-0">
+        <div className="saldoHero p-6 rounded">
+          <div className="bg-[#F13B2F] flex flex-col gap-3 w-[65%] rounded">
+            <div className="text-white text-md md:text-lg font-medium">Saldo anda</div>
+            <div className="text-white text-2xl md:text-3xl font-medium">
               Rp{" "}
               <span className="ml-2">
                 {saldoVisibility

@@ -59,7 +59,7 @@ function FormEdit({ user, isDisabled, setIsDisabled }) {
     }
   };
   return (
-    <div className="flex flex-col w-[60%]">
+    <div className="flex flex-col w-full md:w-[60%]">
       <form onSubmit={handleSubmit}>
         <Input
           type="email"

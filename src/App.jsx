@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-start justify-between">
+      <div className="grid grid-cols-4 md:flex items-start justify-between">
         {services.map((service) => {
           return (
             <div

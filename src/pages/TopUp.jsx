@@ -46,8 +46,8 @@ function TopUpPage() {
       <div className="text-lg mt-4">Silahkan masukan</div>
       <div className="text-3xl font-medium mt-1">Nominal Top Up</div>
       <div className="mt-5">
-        <div className="flex justify-between">
-          <div className="w-[67%]">
+        <div className="flex flex-col-reverse md:flex-row gap-3 justify-between">
+          <div className="w-full md:w-[67%]">
             <Input
               type="number"
               name="top_up_amount"
@@ -66,11 +66,11 @@ function TopUpPage() {
               Top Up
             </button>
           </div>
-          <div className="grid grid-cols-3 gap-3 text-sm text-center">
+          <div className="grid grid-cols-3 gap-3 text-sm text-center my-3 md:my-0">
             {nominalOptions.map((nominal, i) => {
               return (
                 <div
-                  className="border rounded py-2 px-4 flex items-center hover:bg-gray cursor-pointer border-dark-gray"
+                  className="border rounded py-2 px-1 md:px-4 flex items-center hover:bg-gray cursor-pointer border-dark-gray"
                   key={i}
                   onClick={() =>
                     setFormData((prevData) => ({
